@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#5d1934">
+  <meta name="description" content="श्री राधे नाम जाप का दैनिक, मासिक और जीवनभर का tracker">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Yatra+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <title>श्री राधे नाम जाप</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">राधे</div>
+        <div>
+          <p class="eyebrow">श्री राधे नाम जाप</p>
+          <h1>जाप Tracker</h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="installBtn" type="button" title="होम स्क्रीन पर जोड़ें" hidden aria-label="होम स्क्रीन पर जोड़ें">⇩</button>
+        <button class="icon-btn" id="settingsBtn" type="button" title="दैनिक लक्ष्य बदलें" aria-label="दैनिक लक्ष्य बदलें">⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="date-chip" id="todayLabel">आज</span>
+          <h2>मन में राधे,<br><em>हर श्वास में राधे।</em></h2>
+          <p>अपने mobile से जाप करें या अपनी माला का जाप यहाँ जोड़ें।</p>
+        </div>
+        <div class="lotus-seal" aria-hidden="true">🪷<span>राधे</span></div>
+      </section>
+
+      <section class="stats-grid" aria-label="जाप का सारांश">
+        <article class="stat-card featured">
+          <div class="stat-heading"><span>आज का जाप</span><span class="status-dot"></span></div>
+          <strong id="todayTotal">0</strong>
+          <div class="target-line"><span id="targetText">लक्ष्य 2 करोड़</span><span id="progressText">0%</span></div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">इस महीने</span>
+          <strong id="monthTotal">0</strong>
+          <span class="stat-foot" id="monthName">अगस्त 2026</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">जीवनभर का जाप</span>
+          <strong id="lifetimeTotal">0</strong>
+          <span class="stat-foot">आपकी साधना यात्रा</span>
+        </article>
+      </section>
+
+      <section class="practice-layout">
+        <div class="section-heading">
+          <div><span class="section-kicker">आज की साधना</span><h2>जाप जोड़ें</h2></div>
+          <span class="save-note">✓ अपने आप सुरक्षित</span>
+        </div>
+        <button class="radhe-btn" id="radheTap" type="button" aria-label="RADHA जाप, एक count जोड़ें">RADHA</button>
+        <div class="manual-entry">
+          <div class="manual-icon">दिन</div>
+          <div class="manual-copy"><strong>किसी पुराने दिन का जाप जोड़ें</strong><span>अपनी माला से किया हुआ count दर्ज करें</span></div>
+          <div class="manual-form">
+            <input id="manualDate" type="date" aria-label="जाप की तारीख">
+            <input id="manualCount" inputmode="numeric" type="number" min="1" placeholder="संख्या" aria-label="माला जाप की संख्या">
+            <button class="add-btn" id="addManual" type="button">जोड़ें</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-heading">
+          <div><span class="section-kicker">आपकी निरंतरता</span><h2>महीने का इतिहास</h2></div>
+          <label class="month-picker"><span class="sr-only">महीना चुनें</span><input id="monthPicker" type="month"></label>
+        </div>
+        <div class="history-summary"><strong id="historyTotal">0</strong><span>जाप इस महीने</span><span class="history-divider"></span><strong id="activeDays">0</strong><span>सक्रिय दिन</span></div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="cloud-banner">
+        <div class="cloud-icon">☁</div>
+        <div><strong>आपका जाप, सुरक्षित और आपके साथ</strong><p id="syncText">इस device पर सुरक्षित है। Cloud sync जोड़ने के लिए settings खोलें।</p></div>
+        <button class="text-btn" id="exportBtn" type="button">Backup</button>
+      </section>
+    </main>
+    <footer><span>श्री राधे</span><span>•</span><span>आपकी साधना, आपकी गति</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card" id="settingsForm">
+      <button class="close-btn" value="cancel" aria-label="बंद करें">×</button>
+      <span class="section-kicker">साधना सेटिंग</span><h2>दैनिक लक्ष्य</h2>
+      <p>आपका लक्ष्य खुला है: 2 करोड़ के बाद भी जाप जोड़ते रहें।</p>
+      <label for="targetInput">कुल लक्ष्य</label><input id="targetInput" type="number" min="1" inputmode="numeric">
+      <button class="dialog-submit" value="default">लक्ष्य सुरक्षित करें</button>
+    </form>
+  </dialog>
+  <script src="app.js?v=5"></script>
+</body>
+</html>
