@@ -26,6 +26,15 @@ for(let i=0;i<108;i++){
   b.style.transform=`translate(-50%,-50%) rotate(${i*360/108}deg) translateY(-${beadRadius}px)`;
   beads.append(b);
 }
+function ensureMalaView(){
+  const view=document.createElement('section');
+  view.id='malaView';
+  view.className='view-panel mala-view';
+  view.hidden=true;
+  view.innerHTML='<b>साधना का क्रम</b><h2>माला डैशबोर्ड</h2><div class="mala-summary"><article><strong id="malaTodayValue">0</strong><small>आज पूरी माला</small></article><article><strong id="malaCurrentValue">0/108</strong><small>वर्तमान माला</small></article><article><strong id="malaLifetimeValue">0</strong><small>कुल माला</small></article></div><section class="mala-progress"><span>वर्तमान माला <b id="malaPercent">0%</b></span><i><em id="malaProgressBar"></em></i><small id="malaRemaining">108 जाप बाकी</small></section><div class="mala-history-head"><strong>दैनिक साधना</strong><small>तारीख के अनुसार विवरण</small></div><div id="malaHistory" class="mala-history"></div>';
+  $('#granthView').before(view);
+}
+
 function renderBooks(){
   document.querySelectorAll('#granthView > b, #granthView > h2').forEach((heading)=>heading.remove());
   const list=$('#bookList');
@@ -46,7 +55,17 @@ function render(){
   const p=Math.min(100,(t/S.target)*100||0);
   $('#todayTotal').textContent=n;
   $('#lifetimeTotal').textContent=t;
-  $('#malaCount').textContent=Math.floor(n/108);
+  const completedMalas=Math.floor(n/108);
+  const currentJaps=n%108;
+  $('#malaCount').textContent=completedMalas;
+  $('#malaTodayValue').textContent=completedMalas;
+  $('#malaCurrentValue').textContent=`${currentJaps}/108`;
+  $('#malaLifetimeValue').textContent=Math.floor(t/108);
+  $('#malaPercent').textContent=`${((currentJaps/108)*100).toFixed(0)}%`;
+  $('#malaProgressBar').style.width=`${(currentJaps/108)*100}%`;
+  $('#malaRemaining').textContent=`${108-currentJaps} जाप बाकी`;
+  const history=Object.entries(S.entries).sort(([a],[b])=>b.localeCompare(a));
+  $('#malaHistory').innerHTML=history.length?history.map(([date,count])=>{const completed=Math.floor(count/108);const current=count%108;const formatted=new Intl.DateTimeFormat('hi-IN',{day:'numeric',month:'short',year:'numeric'}).format(new Date(`${date}T00:00:00`));return `<article class="mala-day"><div><strong>${formatted}</strong><small>${date===day()?'आज की साधना':'दैनिक jap विवरण'}</small></div><div class="mala-day-count"><b>${count.toLocaleString('hi-IN')}</b><small>जाप</small></div><div class="mala-day-meta"><span>${completed} माला पूरी</span><span>${current}/108 वर्तमान</span></div><i><em style="width:${current?current/108*100:completed?100:0}%"></em></i></article>`}).join(''):'<div class="mala-empty">अभी कोई दैनिक रिकॉर्ड नहीं है। जाप शुरू करें और आपका विवरण यहाँ दिखाई देगा।</div>';
   $('#ringCount').textContent=`${n%108}/108`;
   $('#progressText').textContent=`${p.toFixed(2)}%`;
   $('#progressBar').style.width=`${p}%`;
@@ -54,9 +73,9 @@ function render(){
   document.querySelectorAll('.bead').forEach((b,i)=>b.classList.toggle('lit',i<n%108));
 }
 function setView(name){
-  const map={jap:'japView',mala:'japView',granth:'granthView',prasang:'prasangView'};
+  const map={jap:'japView',mala:'malaView',granth:'granthView',prasang:'prasangView'};
   const activeMap={jap:'japBtn',mala:'malaBtn',granth:'granthBtn',prasang:'prasangBtn'};
-  const ids=['japView','granthView','prasangView','readerView'];
+  const ids=['japView','malaView','granthView','prasangView','readerView'];
   ids.forEach((id)=>{
     const el=document.getElementById(id);
     if(!el) return;
@@ -134,6 +153,7 @@ $('#importInput').onchange=async (e)=>{
   render();
   toast('Data restored');
 };
+ensureMalaView();
 renderBooks();
 render();
 setView('jap');
