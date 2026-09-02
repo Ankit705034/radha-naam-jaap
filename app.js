@@ -19,10 +19,11 @@ const books=[
   {id:'hanuman-charit',title:'श्री हनुमान चरित',snippet:'सेवा, साहस और रामनाम की शक्ति',chapters:['जन्म और बाललीला','सूर्यदेव से शिक्षा','श्रीराम से प्रथम मिलन','सीता माता की खोज','लंका में भक्ति और पराक्रम','संजीवनी और सेवा','राम विजय में योगदान','अखंड रामभक्ति'].map((title,index)=>({title,summary:`अध्याय ${index+1} में ${title} के माध्यम से निष्ठा, विनम्रता और सेवा का संदेश।`}))}
 ];
 const beads=$('#beads');
+const beadRadius=Math.min(window.innerWidth*.31,120);
 for(let i=0;i<108;i++){
   const b=document.createElement('i');
   b.className='bead';
-  b.style.transform=`translate(-50%,-50%) rotate(${i*360/108}deg) translateY(-160px)`;
+  b.style.transform=`translate(-50%,-50%) rotate(${i*360/108}deg) translateY(-${beadRadius}px)`;
   beads.append(b);
 }
 function renderBooks(){
