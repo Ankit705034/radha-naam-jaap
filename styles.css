@@ -1,3 +1,7 @@
+ .mala-art{background:#211811}
+ .mala-art img{width:54%;opacity:.92;filter:saturate(1.05) sepia(.04) brightness(1.08)}
+ .mala-art .left{mask-image:linear-gradient(to right,#000 42%,rgba(0,0,0,.8) 78%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 42%,rgba(0,0,0,.8) 78%,transparent 100%)}
+ .mala-art .right{mask-image:linear-gradient(to left,#000 42%,rgba(0,0,0,.8) 78%,transparent 100%);-webkit-mask-image:linear-gradient(to left,#000 42%,rgba(0,0,0,.8) 78%,transparent 100%)}
 @media (max-width:470px){.stats{grid-template-columns:1fr 1fr !important}.stats article:last-child{grid-column:span 2 !important}.stats article{min-height:82px !important;padding:8px !important}.stats strong{font-size:23px !important}.stats span,.stats small{font-size:10px !important}.ring{width:min(62vw,240px) !important;margin:10px auto 8px !important}.beads{inset:-7px !important}.progress{font-size:10px !important}}
 @media (max-width:470px){.app-shell{width:100%;max-width:none;margin:0}nav{width:100%}}
 .app-shell{width:100%;max-width:none}
