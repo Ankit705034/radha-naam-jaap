@@ -12,9 +12,11 @@ const toast=(msg)=>{
   toast.timer=setTimeout(()=>t.classList.remove('show'),1700);
 };
 const books=[
-  {id:'radha-bhakti',title:'राधा भक्ति',snippet:'श्री राधा के चरणों में मन को अर्पित करना',content:['राधा का स्मरण ही मन को शांति देता है।','हर नाम के साथ प्रेम का विस्तार होता है।','साधना में निरंतरता वही है जो आत्मा को उजला बनाती है।']},
-  {id:'naam-sadhana',title:'नाम साधना',snippet:'अभ्यास से प्रगति, प्रगति से आनंद',content:['नाम जाप एक सरल, परंतु शक्तिशाली साधना है।','सारी थकान, चिंता और भ्रम नाम में विलीन हो जाते हैं।','नियमितता से मन की शुद्धि और एकाग्रता बढ़ती है।']},
-  {id:'prem-prakash',title:'प्रेम प्रकाश',snippet:'भक्ति का सच्चा स्वरूप प्रेम है',content:['प्रेम बिना आचरण का अर्थ नहीं होता।','हर अभ्यासी को अपने अंदर शुद्धता और विनम्रता रखनी चाहिए।','जप का अर्थ केवल संख्या नहीं, भाव है।']}
+  {id:'gita',title:'श्रीमद्भगवद्गीता',snippet:'कर्म, ज्ञान और भक्ति का मार्ग',chapters:['अर्जुन विषाद योग','सांख्य योग','कर्म योग','ज्ञान कर्म संन्यास योग','कर्म संन्यास योग','ध्यान योग','ज्ञान विज्ञान योग','अक्षर ब्रह्म योग','राजविद्या राजगुह्य योग','विभूति योग','विश्वरूप दर्शन योग','भक्ति योग','क्षेत्र-क्षेत्रज्ञ विभाग योग','गुणत्रय विभाग योग','पुरुषोत्तम योग','दैवासुर संपद विभाग योग','श्रद्धात्रय विभाग योग','मोक्ष संन्यास योग'].map((title,index)=>({title,summary:`अध्याय ${index+1} में जीवन, कर्तव्य और आत्मज्ञान के विषय पर भगवान श्रीकृष्ण का मार्गदर्शन।`}))},
+  {id:'ramcharitmanas',title:'रामचरितमानस',snippet:'मर्यादा, भक्ति और आदर्श जीवन',chapters:['बालकांड','अयोध्याकांड','अरण्यकांड','किष्किंधाकांड','सुंदरकांड','लंकाकांड','उत्तरकांड'].map((title,index)=>({title,summary:`${title} में श्रीराम के चरित्र, धर्म और भक्तिभाव का प्रेरक प्रसंग।`}))},
+  {id:'bhagavat',title:'श्रीमद्भागवत महापुराण',snippet:'प्रेमभक्ति और भगवान की कथाएँ',chapters:['प्रथम स्कंध: कथा की भूमिका','द्वितीय स्कंध: विराट स्वरूप','तृतीय स्कंध: सृष्टि और कपिल ज्ञान','चतुर्थ स्कंध: ध्रुव और प्रह्लाद भक्ति','पंचम स्कंध: ऋषभदेव और लोक वर्णन','षष्ठ स्कंध: अजामिल और नामस्मरण','सप्तम स्कंध: प्रह्लाद चरित्र','अष्टम स्कंध: गजेन्द्र और समुद्र मंथन','नवम स्कंध: राजर्षियों की वंशपरंपरा','दशम स्कंध: श्रीकृष्ण लीला','एकादश स्कंध: उद्धव गीता','द्वादश स्कंध: कलियुग और उपसंहार'].map((title,index)=>({title,summary:`स्कंध ${index+1} का सार: भक्ति, सदाचार और ईश्वर-स्मरण से जीवन को पवित्र बनाने का संदेश।`}))},
+  {id:'vishnu-purana',title:'विष्णु पुराण',snippet:'धर्म, सृष्टि और विष्णु भक्ति',chapters:['सृष्टि और प्रकृति','पृथ्वी और लोकों का वर्णन','राजवंश और मन्वंतर','धर्म और आश्रम व्यवस्था','श्रीकृष्ण चरित','प्रलय और मुक्ति'].map((title,index)=>({title,summary:`भाग ${index+1} में ${title} से जुड़े धर्म, ज्ञान और भक्ति के प्रसंग।`}))},
+  {id:'hanuman-charit',title:'श्री हनुमान चरित',snippet:'सेवा, साहस और रामनाम की शक्ति',chapters:['जन्म और बाललीला','सूर्यदेव से शिक्षा','श्रीराम से प्रथम मिलन','सीता माता की खोज','लंका में भक्ति और पराक्रम','संजीवनी और सेवा','राम विजय में योगदान','अखंड रामभक्ति'].map((title,index)=>({title,summary:`अध्याय ${index+1} में ${title} के माध्यम से निष्ठा, विनम्रता और सेवा का संदेश।`}))}
 ];
 const beads=$('#beads');
 for(let i=0;i<108;i++){
@@ -24,13 +26,14 @@ for(let i=0;i<108;i++){
   beads.append(b);
 }
 function renderBooks(){
+  document.querySelectorAll('#granthView > b, #granthView > h2').forEach((heading)=>heading.remove());
   const list=$('#bookList');
-  list.innerHTML=books.map(book=>`<button class="book-card" data-book="${book.id}"><strong>${book.title}</strong><small>${book.snippet}</small></button>`).join('');
+  list.innerHTML=books.map(book=>`<button class="book-card" data-book="${book.id}"><strong>${book.title}</strong><small>${book.chapters.length} अध्याय · ${book.snippet}</small></button>`).join('');
   list.querySelectorAll('.book-card').forEach((btn)=>{
     btn.onclick=()=>{
       const book=books.find(b=>b.id===btn.dataset.book);
       $('#readerTitle').textContent=book.title;
-      $('#readerContent').innerHTML=`<p>${book.content.join('</p><p>')}</p>`;
+      $('#readerContent').innerHTML=book.chapters.map((chapter,index)=>`<article class="chapter"><h3>${index+1}. ${chapter.title}</h3><p>${chapter.summary}</p><strong>विस्तृत सार</strong><p>${chapter.detail||`${chapter.title} का यह भाग साधना, धर्म और आत्मचिंतन को समझने का अवसर देता है। इसे धीरे-धीरे पढ़कर अपने जीवन में इसके संदेश पर विचार करें।`}</p></article>`).join('');
       $('#granthView').hidden=true;
       $('#readerView').hidden=false;
     };
@@ -61,6 +64,7 @@ function setView(name){
       return;
     }
     el.hidden=id!==map[name];
+    el.style.display=id===map[name]?'':'none';
   });
   document.querySelectorAll('.nav-btn').forEach((btn)=>btn.classList.toggle('active',btn.id===activeMap[name]));
 }
