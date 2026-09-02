@@ -1,3 +1,4 @@
+@media (max-width:470px){.app-shell{width:100%;max-width:none;margin:0}nav{width:100%}}
 .app-shell>section[hidden]{display:none !important}
 #granthView>b,#granthView>h2{display:none}
 .chapter{margin:12px 0;padding:14px;border-left:3px solid #efa327;background:#18140f}.chapter h3{margin:0 0 6px;color:#ffbd42;font-size:15px}.chapter p{margin:0 0 10px;color:#ded5cb;font-size:13px;line-height:1.75}.chapter strong{display:block;margin:4px 0 5px;color:#efa327;font-size:12px}
