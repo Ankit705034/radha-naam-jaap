@@ -1,0 +1,11 @@
+{
+  "name": "श्री राधे नाम जाप Tracker",
+  "short_name": "राधे जाप",
+  "description": "दैनिक राधे नाम जाप tracker",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fffaf4",
+  "theme_color": "#5d1934",
+  "lang": "hi",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

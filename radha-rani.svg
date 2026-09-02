@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">राधा रानी</title>
+  <desc id="desc">राधा रानी का कोमल भक्तिमय चित्रण</desc>
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="40%" r="58%">
+      <stop offset="0" stop-color="#fff4c9"/>
+      <stop offset="1" stop-color="#f2b65f"/>
+    </radialGradient>
+    <linearGradient id="veil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e66d91"/>
+      <stop offset="1" stop-color="#9f2457"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd88c"/>
+      <stop offset="1" stop-color="#e49a43"/>
+    </linearGradient>
+  </defs>
+  <circle cx="160" cy="160" r="153" fill="#fff7df"/>
+  <circle cx="160" cy="150" r="126" fill="url(#halo)" opacity=".8"/>
+  <path d="M61 281c16-62 52-90 99-90s83 28 99 90" fill="url(#dress)" stroke="#9f2457" stroke-width="5"/>
+  <path d="M74 160c0-71 35-119 86-119s86 48 86 119c-19-26-38-37-61-42-29 33-67 42-111 42z" fill="url(#veil)" stroke="#7e1c47" stroke-width="5"/>
+  <path d="M108 125c4-38 25-61 52-61 31 0 51 28 52 66-19-13-34-23-54-25-18 15-31 19-50 20z" fill="#f5b17e" stroke="#7e1c47" stroke-width="4"/>
+  <path d="M119 132c11 8 27 12 41 12s30-4 41-12c-3 37-18 56-41 56s-38-19-41-56z" fill="#f6bd8b"/>
+  <path d="M135 151c6 4 12 5 17 4M168 155c6 1 12 0 17-4" fill="none" stroke="#7e1c47" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="145" cy="146" r="3" fill="#5d1934"/><circle cx="175" cy="146" r="3" fill="#5d1934"/>
+  <path d="M154 168c5 4 7 4 12 0" fill="none" stroke="#b34e54" stroke-width="3" stroke-linecap="round"/>
+  <path d="M103 118c19-16 40-19 57-19 23 0 42 8 59 22" fill="none" stroke="#f5d46d" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="160" cy="94" r="9" fill="#e9b94c" stroke="#9f2457" stroke-width="3"/>
+  <path d="M160 92l-11-28 19 19 11-27 2 33" fill="#e85d84" stroke="#9f2457" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M85 174c20 8 27 28 30 48M235 174c-20 8-27 28-30 48" fill="none" stroke="#f5d46d" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="112" cy="181" r="8" fill="#e85d84"/><circle cx="208" cy="181" r="8" fill="#e85d84"/>
+</svg>
