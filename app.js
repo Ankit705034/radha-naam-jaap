@@ -31,8 +31,26 @@ function ensureMalaView(){
   view.id='malaView';
   view.className='view-panel mala-view';
   view.hidden=true;
-  view.innerHTML='<b>साधना का क्रम</b><h2>माला डैशबोर्ड</h2><div class="mala-summary"><article><strong id="malaTodayValue">0</strong><small>आज पूरी माला</small></article><article><strong id="malaCurrentValue">0/108</strong><small>वर्तमान माला</small></article><article><strong id="malaLifetimeValue">0</strong><small>कुल माला</small></article></div><section class="mala-progress"><span>वर्तमान माला <b id="malaPercent">0%</b></span><i><em id="malaProgressBar"></em></i><small id="malaRemaining">108 जाप बाकी</small></section><div class="mala-history-head"><strong>दैनिक साधना</strong><small>तारीख के अनुसार विवरण</small></div><div id="malaHistory" class="mala-history"></div>';
+  view.innerHTML='<b>साधना का क्रम</b><h2>माला डैशबोर्ड</h2><div class="mala-summary"><article><strong id="malaTodayValue">0</strong><small>आज पूरी माला</small></article><article><strong id="malaCurrentValue">0/108</strong><small>वर्तमान माला</small></article><article><strong id="malaLifetimeValue">0</strong><small>कुल माला</small></article></div><button class="manual-mala-btn" id="manualMalaBtn">＋ भौतिक माला जोड़ें</button><section class="mala-progress"><span>वर्तमान माला <b id="malaPercent">0%</b></span><i><em id="malaProgressBar"></em></i><small id="malaRemaining">108 जाप बाकी</small></section><div class="mala-history-head"><strong>दैनिक साधना</strong><small>तारीख के अनुसार विवरण</small></div><div id="malaHistory" class="mala-history"></div>';
   $('#granthView').before(view);
+  const dialog=document.createElement('dialog');
+  dialog.id='manualMalaDialog';
+  dialog.innerHTML='<form method="dialog" id="manualMalaForm"><button value="cancel">×</button><b>भौतिक माला जोड़ें</b><h2>आज की पूरी हुई माला</h2><label>माला की संख्या<input id="manualMalaInput" type="number" min="1" step="1" value="1" inputmode="numeric"></label><small>हर माला में 108 जाप जुड़ेंगे।</small><button>जाप में जोड़ें</button></form>';
+  document.body.append(dialog);
+  $('#manualMalaBtn').onclick=()=>{
+    $('#manualMalaInput').value=1;
+    dialog.showModal();
+  };
+  $('#manualMalaForm').onsubmit=(event)=>{
+    event.preventDefault();
+    const malas=Number($('#manualMalaInput').value);
+    if(!Number.isInteger(malas)||malas<1){toast('माला की संख्या डालें');return}
+    S.entries[day()]=(S.entries[day()]||0)+(malas*108);
+    save();
+    render();
+    dialog.close();
+    toast(`${malas} भौतिक माला दर्ज हुई`);
+  };
 }
 
 function renderBooks(){
