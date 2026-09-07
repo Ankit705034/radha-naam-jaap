@@ -1,5 +1,5 @@
-const CACHE = 'radha-jap-v24';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icon.svg', './radha-rani.jpg', './barsana.jpg', './mala-left.jpg', './mala-right.jpg'];
+const CACHE = 'radha-jap-v25';
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './geeta-data.js', './manifest.webmanifest', './icon.svg', './radha-rani.jpg', './barsana.jpg', './mala-left.jpg', './mala-right.jpg'];
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS))));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('install', () => self.skipWaiting());
